@@ -39,13 +39,11 @@ class NotesViewModel @Inject constructor(private val useCases: NotesUseCases): V
                 }
             }
             is NotesEvents.Order -> {
-                viewModelScope.launch {
-                    if(state.value.notesOrder::class == event.notesOrder::class &&
-                            state.value.notesOrder.orderType == state.value.notesOrder.orderType) {
-                        return@launch
-                    }
-                    recoverNotes(event.notesOrder)
+                if(state.value.notesOrder::class == event.notesOrder::class &&
+                    state.value.notesOrder.orderType == event.notesOrder.orderType) {
+                    return
                 }
+                recoverNotes(event.notesOrder)
             }
             is NotesEvents.Restore -> {
                 viewModelScope.launch {

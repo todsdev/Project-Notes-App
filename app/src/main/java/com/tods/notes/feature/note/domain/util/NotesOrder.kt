@@ -10,9 +10,9 @@ sealed class NotesOrder(
 
     fun copy(orderType: OrderType): NotesOrder {
         return when(this) {
-            is NotesOrder.Title -> NotesOrder.Title(orderType)
-            is NotesOrder.Date -> NotesOrder.Date(orderType)
-            is NotesOrder.Color -> NotesOrder.Color(orderType)
+            is Title -> Title(orderType)
+            is Date -> Date(orderType)
+            is Color -> Color(orderType)
         }
     }
 }
