@@ -17,14 +17,14 @@ class RecoverNotes(
     ): Flow<List<NotesModel>> {
         return repository.recoverNotes().map { notes ->
             when(notesOrder.orderType) {
-                is OrderType.Descending -> {
+                is OrderType.Ascending -> {
                     when(notesOrder) {
                         is NotesOrder.Date -> notes.sortedBy { it.timestamp }
                         is NotesOrder.Title -> notes.sortedBy { it.title.lowercase(Locale.ROOT) }
                         is NotesOrder.Color -> notes.sortedBy { it.color }
                     }
                 }
-                is OrderType.Ascending -> {
+                is OrderType.Descending -> {
                     when(notesOrder) {
                         is NotesOrder.Date -> notes.sortedByDescending { it.timestamp }
                         is NotesOrder.Title -> notes.sortedByDescending { it.title.lowercase(Locale.ROOT) }
